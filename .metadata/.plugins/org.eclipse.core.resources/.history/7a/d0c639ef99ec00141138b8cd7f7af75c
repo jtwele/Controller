@@ -1,0 +1,26 @@
+package controller;
+
+public class messageSender {
+
+	
+	
+	
+	public void sendeNachricht(String ziel, String nachricht) {
+		
+		
+	}
+	
+	private void sendeAnInvoiceNinja(){
+		
+	}
+	
+	private void sendeAnInvoiceNinja(){
+		
+	}
+	
+	private void sendeAnInvoiceNinja(){
+		
+	}
+
+	
+}
