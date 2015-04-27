@@ -1,24 +1,23 @@
-08:47:28,701 I: (ErlangCore.java:66) : Starting CORE Thread[Worker-0,5,main]
-08:47:28,718 I: (ErlangCore.java:75) : *** starting Erlide v0.29.1.201406251903 (core=0.24.7.201406251903) (model api=0.24.8.201406251903) *** (Cp1252) 
-08:47:28,723 I: (ErlangCore.java:82) : Started CORE
-08:47:28,724 F: (ErlangPlugin.java:88) : Core started
-08:47:30,958 F: (ErlangHostnameRetriever.java:40) : Test long hostname: HEDWIG.informatik.haw-hamburg.de
-08:47:31,512 F: (ErlangHostnameRetriever.java:40) : Test short hostname: HEDWIG
-08:47:31,519 F: (HostnameUtils.java:74) : Detected:: HEDWIG && HEDWIG.informatik.haw-hamburg.de
-08:47:31,550 F: (BackendPlugin.java:26) : Backend plugin started
-08:47:31,561 I: (ErlideUIPlugin.java:163) : Starting UI Thread[Worker-0,5,main]
-08:47:31,576 F: (ModelActivator.java:19) : Starting Erlang model api
-08:47:31,583 F: (ModelPlugin.java:37) : Starting Erlang model
-08:47:31,584 F: (ModelPlugin.java:40) : Started model
-08:47:31,602 F: (BackendFactory.java:44) : Create ide backend 17.0.0
-08:47:31,602 F: (BackendFactory.java:76) : Create backend e6797_aaz705_339d10_erlide
-08:47:31,654 F: (ErlRuntime.java:414) : Runtime e6797_aaz705_339d10_erlide@HEDWIG.informatik.haw-hamburg.de starting
-08:47:31,655 F: (ManagedErlRuntime.java:59) : START node :> ["c:\program files\erl6.2/bin/erl", -name, e6797_aaz705_339d10_erlide@HEDWIG.informatik.haw-hamburg.de, -setcookie, erlide] *** Z:\hawai
-08:47:31,861 F: (ErlRuntime.java:274) : using cookie 'erlide...'6 (info: 'erlide')
-08:47:31,867 F: (ErlRuntime.java:279) : e6797_aaz705_339d10_erlide@HEDWIG.informatik.haw-hamburg.de: waiting connection to peer...
-08:47:32,077 F: (ErlRuntime.java:419) : Runtime e6797_aaz705_339d10_erlide@HEDWIG.informatik.haw-hamburg.de running
-08:47:32,358 F: (LogEventHandler.java:27) : info: {"Monitoring java node",'jerlide_9339e13@HEDWIG.informatik.haw-hamburg.de'}
-08:47:32,365 F: (LogEventHandler.java:27) : info: {"Start monitor process: ",10000000,50000000}
-08:47:32,569 F: (ModelActivator.java:30) : Started model api
-08:47:32,594 I: (ErlideUIPlugin.java:233) : Started UI
-13:03:47,015 F: (ErlRuntime.java:383) : Runtime e6797_aaz705_339d10_erlide@HEDWIG.informatik.haw-hamburg.de terminated
+15:37:18,431 I: (ErlangCore.java:66) : Starting CORE Thread[Worker-4,5,main]
+15:37:18,431 I: (ErlangCore.java:75) : *** starting Erlide v0.29.1.201406251903 (core=0.24.7.201406251903) (model api=0.24.8.201406251903) *** (Cp1252) 
+15:37:18,431 I: (ErlangCore.java:82) : Started CORE
+15:37:18,431 F: (ErlangPlugin.java:88) : Core started
+15:37:19,726 F: (ErlangHostnameRetriever.java:40) : Test long hostname: HEDWIG.informatik.haw-hamburg.de
+15:37:20,209 F: (ErlangHostnameRetriever.java:40) : Test short hostname: HEDWIG
+15:37:20,225 F: (HostnameUtils.java:74) : Detected:: HEDWIG && HEDWIG.informatik.haw-hamburg.de
+15:37:20,256 F: (BackendPlugin.java:26) : Backend plugin started
+15:37:20,256 I: (ErlideUIPlugin.java:163) : Starting UI Thread[Worker-4,5,main]
+15:37:20,256 F: (ModelActivator.java:19) : Starting Erlang model api
+15:37:20,272 F: (ModelPlugin.java:37) : Starting Erlang model
+15:37:20,272 F: (ModelPlugin.java:40) : Started model
+15:37:20,287 F: (BackendFactory.java:44) : Create ide backend 17.0.0
+15:37:20,287 F: (BackendFactory.java:76) : Create backend e6797_aaz705_aace9f_erlide
+15:37:20,350 F: (ErlRuntime.java:414) : Runtime e6797_aaz705_aace9f_erlide@HEDWIG.informatik.haw-hamburg.de starting
+15:37:20,365 F: (ManagedErlRuntime.java:59) : START node :> ["c:\program files\erl6.2/bin/erl", -name, e6797_aaz705_aace9f_erlide@HEDWIG.informatik.haw-hamburg.de, -setcookie, erlide] *** Z:\hawai
+15:37:20,568 F: (ErlRuntime.java:274) : using cookie 'erlide...'6 (info: 'erlide')
+15:37:20,568 F: (ErlRuntime.java:279) : e6797_aaz705_aace9f_erlide@HEDWIG.informatik.haw-hamburg.de: waiting connection to peer...
+15:37:21,177 F: (ErlRuntime.java:419) : Runtime e6797_aaz705_aace9f_erlide@HEDWIG.informatik.haw-hamburg.de running
+15:37:21,451 F: (LogEventHandler.java:27) : info: {"Monitoring java node",'jerlide_aaacfb8@HEDWIG.informatik.haw-hamburg.de'}
+15:37:21,451 F: (LogEventHandler.java:27) : info: {"Start monitor process: ",10000000,50000000}
+15:37:21,685 F: (ModelActivator.java:30) : Started model api
+15:37:21,717 I: (ErlideUIPlugin.java:233) : Started UI
