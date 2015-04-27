@@ -11,28 +11,26 @@ public class MessageSender {
 	private final String WAWISION_QUEUE = "waWision";
 	private final String SUGAR_QUEUE = "sugar";
 	
+	private final String INVOICE_HOST = "141.22.29.97";
+	private final String WAWISION_HOST = "141.22.29.96";
+	private final String SUGAR_HOST = "141.22.29.95";
+	
+	private final String INVOICE_USER = "invoice";
+	private final String WAWISION_USER = "wawision";
+	private final String SUGAR_USER = "sugar";
+	
+	private final String INVOICE_PW = "invoice";
+	private final String WAWISION_PW = "wawision";
+	private final String SUGAR_PW = "sugar";
+	
 	private Channel channel;
 	private ConnectionFactory factory;
 	private Connection connection;
 	
-	public MessageSender(String host) {
-		createConnection(host);
-		declareQueue();
+	public MessageSender() {
 	}
 
-	private void declareQueue() {
-		try {
-			channel.queueDeclare(INVOICE_QUEUE, false, false, false, null);
-			channel.queueDeclare(WAWISION_QUEUE, false, false, false, null);
-			channel.queueDeclare(SUGAR_QUEUE, false, false, false, null);
-		} catch (IOException e) {
-			System.out.println("Channel declaration fehlgeschlagen");
-		}	
-	}
-
-	private void createConnection(String host) {
-		this.factory = new ConnectionFactory();
-		factory.setHost(host);
+	private void createConnection() {
 		try {
 			this.connection = factory.newConnection();
 		} catch (IOException e) {
@@ -44,36 +42,46 @@ public class MessageSender {
 			System.out.println("Create Channel fehlgeschlagen");
 		}
 	}
+
+	private void declareQueue(String queueName) {
+		try {
+			channel.queueDeclare(queueName, false, false, false, null);
+		} catch (IOException e) {
+			System.out.println("Channel declaration fehlgeschlagen");
+		}	
+	}
 	
-//	private void closeConnection() {
-//		try {
-//			channel.close();
-//		} catch (IOException e) {
-//			System.out.println("Close Channel fehlgeschlagen");
-//		}
-//		try {
-//			connection.close();
-//		} catch (IOException e) {
-//			System.out.println("Close Connection fehlgeschlagen");
-//		}
-//	}
-	
-	/* Nach jeder gesendeten Nachricht wird Connection geschlossen */
-	public void sendeNachricht(String ziel, String nachricht) {
+	public void sendMessage(String ziel, String nachricht) {
 		switch (ziel) {
 		case "IN":
-				this.sendToInvoiceNinja(nachricht);
+			setConnectionCredentials(INVOICE_HOST, INVOICE_USER, INVOICE_PW);
+			this.createConnection();
+			this.declareQueue(INVOICE_QUEUE);
+			sendToInvoiceNinja(nachricht);
 			break;
 		case "WW":
-				this.sendToWawision(nachricht);
+			setConnectionCredentials(WAWISION_HOST, WAWISION_USER, WAWISION_PW);
+			this.createConnection();
+			this.declareQueue(WAWISION_QUEUE);
+			sendToWawision(nachricht);
 			break;
 		case "SG":
-				this.sendToSugarCrm(nachricht);
+			setConnectionCredentials(SUGAR_HOST, SUGAR_USER, SUGAR_PW);
+			this.createConnection();
+			this.declareQueue(SUGAR_QUEUE);
+			sendToSugarCrm(nachricht);
 			break;
 		default:
 			break;
 		}
 //		closeConnection();
+	}
+
+	private void setConnectionCredentials(String host, String username, String password) {
+		this.factory = new ConnectionFactory();
+		factory.setHost(host);
+		factory.setUsername(username);
+		factory.setPassword(password);
 	}
 
 	private void sendToInvoiceNinja(String message) {
@@ -101,7 +109,7 @@ public class MessageSender {
 	}
 	
 	public static void main(String[] args) {
-//		MessageSender ms = new MessageSender("localhost");
-//		ms.sendeNachricht("IN", "TEST");
+//		MessageSender ms = new MessageSender();
+//		ms.sendMessage("IN", "TEST");
 	}
 }

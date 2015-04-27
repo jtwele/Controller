@@ -6,3 +6,5 @@
 1430115454828	Rename method 'sendeAnWaWision'
 1430115471878	Rename method 'sendeAnSugarCrm'
 1430115484327	Rename method 'sendeAnInvoiceNinja'
+1430120851937	Extract method 'setConnectionCredentials'
+1430121959264	Rename method 'sendeNachricht'
