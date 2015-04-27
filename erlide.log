@@ -21,3 +21,4 @@
 08:47:32,365 F: (LogEventHandler.java:27) : info: {"Start monitor process: ",10000000,50000000}
 08:47:32,569 F: (ModelActivator.java:30) : Started model api
 08:47:32,594 I: (ErlideUIPlugin.java:233) : Started UI
+13:03:47,015 F: (ErlRuntime.java:383) : Runtime e6797_aaz705_339d10_erlide@HEDWIG.informatik.haw-hamburg.de terminated
