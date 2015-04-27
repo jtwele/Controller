@@ -1,8 +1,0 @@
-INDEX VERSION 1.127+Z:\hawai\.metadata\.plugins\org.eclipse.jdt.core
-1159660367.index
-4058838672.index
-4183832586.index
-1598190731.index
-2243722782.index
-614684097.index
-133618449.index
