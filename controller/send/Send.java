@@ -15,8 +15,8 @@ public class Send {
 		MessageSender sender = new MessageSender();
 
 		try{
-		sender.sendMessage("WW", "Nachricht an WaWision gesendet");
-		//sender.sendMessage("IN", "Nachricht an InvoiceNinja gesendet");
+		//sender.sendMessage("WW", "Nachricht an WaWision gesendet");
+		sender.sendMessage("IN", "Nachricht an InvoiceNinja gesendet");
 		//sender.sendMessage("SG", "Nachricht an Sugar gesendet");
 		}catch( IOException e ){
 		}
