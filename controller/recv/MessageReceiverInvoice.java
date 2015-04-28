@@ -65,6 +65,7 @@ public class MessageReceiverInvoice {
 			delivery = consumer.nextDelivery();
 			this.receivedMessage = new String(delivery.getBody());
 			System.out.println(i+"."+"nachricht: "+this.receivedMessage);
+			i++;
 		}
 
 	}
