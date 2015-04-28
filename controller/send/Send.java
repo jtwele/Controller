@@ -6,18 +6,13 @@ import java.io.IOException;
 public class Send {
 
 	public static void main(String[] args) {
-		
-		/*
-		 * IN = invoiceNinja
-		 * WW = WaWision
-		 * SG = Sugar
-		 */
+
 		MessageSender sender = new MessageSender();
 
 		try{
-		//sender.sendMessage("WW", "Nachricht an WaWision gesendet");
-		sender.sendMessage("IN", "Nachricht an InvoiceNinja gesendet");
-		//sender.sendMessage("SG", "Nachricht an Sugar gesendet");
+		sender.sendToInvoice("Nachricht an InvoiceNinja gesendet");
+		sender.sendToSugar("Nachricht an InvoiceNinja gesendet");
+		sender.sendToWaWision("Nachricht an InvoiceNinja gesendet");
 		}catch( IOException e ){
 		}
 
