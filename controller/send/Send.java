@@ -13,10 +13,10 @@ public class Send {
 		 * SG = Sugar
 		 */
 		MessageSender sender = new MessageSender();
-		//sender.sendMessage("IN", "Nachricht an InvoiceNinja gesendet");
 
 		try{
 		sender.sendMessage("WW", "Nachricht an WaWision gesendet");
+		//sender.sendMessage("IN", "Nachricht an InvoiceNinja gesendet");
 		//sender.sendMessage("SG", "Nachricht an Sugar gesendet");
 		}catch( IOException e ){
 		}

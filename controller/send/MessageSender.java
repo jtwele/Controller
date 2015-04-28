@@ -60,22 +60,13 @@ public class MessageSender {
 	
 	
 	private void createConnection()throws IOException{ 
-	//	try {
 			this.connection = factory.newConnection();
 			System.out.println("connection"+this.connection);
 			this.channel =this.connection.createChannel();
-
-	//	} catch (IOException e) {
-	//		System.out.println("Create Channel fehlgeschlagen");
-	//	}
 	}
 
 	private void declareQueue(String queueName)throws IOException {
-		//try {
 			this.channel.queueDeclare(queueName, false, false, false, null);
-		//} catch (IOException e) {
-			System.out.println("Channel declaration fehlgeschlagen");
-		//	}
 	}
 	
 
