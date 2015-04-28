@@ -1,4 +1,4 @@
-package controller.send;
+package send;
 
 import java.io.IOException;
 import com.rabbitmq.client.ConnectionFactory;
@@ -32,7 +32,7 @@ public class MessageSender {
 	}
 
 
-	public void sendMessage(String ziel, String nachricht) {
+	public void sendMessage(String ziel, String nachricht)throws IOException{
 		switch (ziel) {
 		case "IN":
 			setConnectionCredentials(INVOICE_HOST, INVOICE_USER, INVOICE_PW);
@@ -59,57 +59,44 @@ public class MessageSender {
 	}
 	
 	
-	private void createConnection() {
-		try {
+	private void createConnection()throws IOException{ 
+	//	try {
 			this.connection = factory.newConnection();
-		} catch (IOException e) {
-			System.out.println("Verbindung erstellen fehlgeschlagen");
-		}
-	    try {
-			this.channel = connection.createChannel();
-		} catch (IOException e) {
-			System.out.println("Create Channel fehlgeschlagen");
-		}
+			System.out.println("connection"+this.connection);
+			this.channel =this.connection.createChannel();
+
+	//	} catch (IOException e) {
+	//		System.out.println("Create Channel fehlgeschlagen");
+	//	}
 	}
 
-	private void declareQueue(String queueName) {
-		try {
-			channel.queueDeclare(queueName, false, false, false, null);
-		} catch (IOException e) {
+	private void declareQueue(String queueName)throws IOException {
+		//try {
+			this.channel.queueDeclare(queueName, false, false, false, null);
+		//} catch (IOException e) {
 			System.out.println("Channel declaration fehlgeschlagen");
-		}	
+		//	}
 	}
 	
 
 	private void setConnectionCredentials(String host, String username, String password) {
 		this.factory = new ConnectionFactory();
-		factory.setHost(host);
-		factory.setUsername(username);
-		factory.setPassword(password);
+		this.factory.setHost("localhost");
+		this.factory.setUsername(username);
+		this.factory.setPassword(password);
 	}
 
-	private void sendToInvoiceNinja(String message) {
-		try {
+	private void sendToInvoiceNinja(String message) throws IOException{
 			channel.basicPublish("", INVOICE_QUEUE, null, message.getBytes());
-		} catch (IOException e) {
-			System.out.println("Nachrichte an Invoice Ninja fehlgeschlagen");
-		}
 	}
 
-	private void sendToWawision(String message) {
-		try {
-			channel.basicPublish("", WAWISION_QUEUE, null, message.getBytes());
-		} catch (IOException e) {
-			System.out.println("Nachrichte an WaWision fehlgeschlagen");
-		}
+	private void sendToWawision(String message)throws IOException{
+		System.out.println("Sende Nachricht an WaWision");	
+		channel.basicPublish("", WAWISION_QUEUE, null, message.getBytes());
 	}
 
-	private void sendToSugarCrm(String message) {
-		try {
+	private void sendToSugarCrm(String message)throws IOException{
 			channel.basicPublish("", SUGAR_QUEUE, null, message.getBytes());
-		} catch (IOException e) {
-			System.out.println("Nachrichte an Sugar-CRM fehlgeschlagen");
-		}
 	}
 	
 }
