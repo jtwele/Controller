@@ -51,6 +51,7 @@ public class MessageSender {
 		this.createConnection();
 		this.declareQueue(queuename);
 		this.publish(nachricht, queuename);
+		this.closeConnection();
 
 	}
 
