@@ -72,12 +72,13 @@ public class MessageSender {
 
 	private void setConnectionCredentials(String host, String username, String password) {
 		this.factory = new ConnectionFactory();
-		this.factory.setHost("localhost");
+		this.factory.setHost("141.22.29.97");
 		this.factory.setUsername(username);
 		this.factory.setPassword(password);
 	}
 
 	private void sendToInvoiceNinja(String message) throws IOException{
+		System.out.println("Sende Nachricht an Invoice Ninja");
 			channel.basicPublish("", INVOICE_QUEUE, null, message.getBytes());
 	}
 
@@ -87,6 +88,7 @@ public class MessageSender {
 	}
 
 	private void sendToSugarCrm(String message)throws IOException{
+		System.out.println("Sende Nachricht an Sugar");
 			channel.basicPublish("", SUGAR_QUEUE, null, message.getBytes());
 	}
 	
