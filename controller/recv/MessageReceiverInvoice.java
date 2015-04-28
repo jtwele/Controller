@@ -39,9 +39,9 @@ public class MessageReceiverInvoice {
 	private void createConnection() throws IOException {
 		System.out.println("create connection");
 		this.factory = new ConnectionFactory();
-		this.factory.setHost("localhost");
-		this.factory.setUsername("wawision");
-		this.factory.setPassword("wawision");
+		this.factory.setHost("141.22.29.97");
+		this.factory.setUsername("invoice");
+		this.factory.setPassword("invoice");
 		this.factory.setVirtualHost("/");
 		this.connection = factory.newConnection();
 		this.channel = connection.createChannel();
@@ -71,7 +71,7 @@ public class MessageReceiverInvoice {
 	public static void main(String[] args) {
 
 		try {
-			MessageReceiverWaWision mrww = new MessageReceiverWaWision();
+			MessageReceiverInvoice mriv = new MessageReceiverInvoice();
 		} catch (InterruptedException | IOException e) {
 
 		}

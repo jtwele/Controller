@@ -71,7 +71,7 @@ public class MessageReceiverSugar {
 	public static void main(String[] args) {
 
 		try {
-			MessageReceiverWaWision mrww = new MessageReceiverWaWision();
+			MessageReceiverSugar mrsg = new MessageReceiverSugar();
 		} catch (InterruptedException | IOException e) {
 
 		}
