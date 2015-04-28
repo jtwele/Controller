@@ -10,8 +10,8 @@ public class Send {
 		MessageSender sender = new MessageSender();
 
 		try{
-		sender.sendToInvoice("Nachricht an InvoiceNinja gesendet");
-		sender.sendToSugar("Nachricht an Sugar gesendet");
+	//	sender.sendToInvoice("Nachricht an InvoiceNinja gesendet");
+//		sender.sendToSugar("Nachricht an Sugar gesendet");
 		sender.sendToWaWision("Nachricht an WaWision gesendet");
 		}catch( IOException e ){
 		}

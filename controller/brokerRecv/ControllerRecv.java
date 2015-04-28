@@ -14,7 +14,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 public class ControllerRecv {
 	
 	private final String CONTROLLER_QUEUE_INVOICE = "controllerInvoice";
-	private final String CONTROLLER_QUEUE_SUGAR = "controllerSuagr";
+	private final String CONTROLLER_QUEUE_SUGAR = "controllerSugar";
 	private final String CONTROLLER_QUEUE_WAWISION = "controllerWaWision";
 
 	private ConnectionFactory factory;
@@ -28,7 +28,7 @@ public class ControllerRecv {
 		System.out.println("receive()");
 		this.factory = new ConnectionFactory();
 		this.createConnection();
-		this.declareQueue(this.CONTROLLER_QUEUE_INVOICE);
+		this.declareQueue(queueName);
 		this.receiveMessage();
 	}
 	public void receiveFromInvoice() throws InterruptedException, IOException {
@@ -83,7 +83,7 @@ public class ControllerRecv {
 			ControllerRecv cr = new ControllerRecv();
 			
 //			cr.receiveFromInvoice();
-//			cr.receiveFromSugar();
+			cr.receiveFromSugar();
 //			cr.receiveFromWaWision();
 
 	}

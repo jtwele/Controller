@@ -47,6 +47,7 @@ public class MessageSender {
 
 	private void send(String host, String username, String password,
 			String queuename, String nachricht) throws IOException {
+		System.out.println("send()");
 		this.setConnectionCredentials(host, username, password);
 		this.createConnection();
 		this.declareQueue(queuename);
@@ -62,11 +63,14 @@ public class MessageSender {
 	}
 
 	private void declareQueue(String queueName) throws IOException {
+		System.out.println("declareQueue()");
 		this.channel.queueDeclare(queueName, false, false, false, null);
+		System.out.println("ENDE declareQueue()");
 	}
 
 	private void setConnectionCredentials(String host, String username,
 			String password) {
+		System.out.println("setConnectionCerentials()");
 		this.factory = new ConnectionFactory();
 		this.factory.setHost("141.22.29.97");
 		this.factory.setUsername(username);
@@ -74,7 +78,7 @@ public class MessageSender {
 	}
 
 	private void publish(String message, String queueName) throws IOException {
-		System.out.println("Sende Nachricht an Invoice Ninja");
+		System.out.println("Sende Nachricht an "+queueName);
 		this.channel.basicPublish("", queueName, null, message.getBytes());
 	}
 
