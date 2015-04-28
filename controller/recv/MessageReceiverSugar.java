@@ -57,13 +57,14 @@ public class MessageReceiverSugar {
 
 	private void receiveMessage() throws ShutdownSignalException,
 			ConsumerCancelledException, InterruptedException {
+		int i = 0;
 		System.out.println("receive Message");
 		QueueingConsumer.Delivery delivery = null;
 		while (true) {
 			System.out.println("waiting for messages");
 			delivery = consumer.nextDelivery();
 			this.receivedMessage = new String(delivery.getBody());
-			System.out.println(this.receivedMessage);
+			System.out.println((++i)+"."+"empfangene nachricht: "+this.receivedMessage);
 		}
 
 	}
