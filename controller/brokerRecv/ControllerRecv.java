@@ -24,10 +24,10 @@ public class ControllerRecv {
 	private String receivedMessage;
 
 
-	private void receive(String name) throws IOException, ShutdownSignalException, ConsumerCancelledException, InterruptedException{
+	private void receive(String queueName) throws IOException, ShutdownSignalException, ConsumerCancelledException, InterruptedException{
 		System.out.println("receive()");
 		this.factory = new ConnectionFactory();
-		this.createConnection(this.CONTROLLER_QUEUE_INVOICE);
+		this.createConnection();
 		this.declareQueue(this.CONTROLLER_QUEUE_INVOICE);
 		this.receiveMessage();
 	}
@@ -45,12 +45,12 @@ public class ControllerRecv {
 		return this.receivedMessage;
 	}
 
-	private void createConnection(String name) throws IOException {
+	private void createConnection() throws IOException {
 		System.out.println("create connection");
 		this.factory = new ConnectionFactory();
 		this.factory.setHost("141.22.29.97");
-		this.factory.setUsername(name);
-		this.factory.setPassword(name);
+		this.factory.setUsername("controller");
+		this.factory.setPassword("controller");
 		this.factory.setVirtualHost("/");
 		this.connection = factory.newConnection();
 		this.channel = connection.createChannel();
