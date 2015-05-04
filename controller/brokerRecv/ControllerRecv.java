@@ -23,6 +23,9 @@ public class ControllerRecv {
 	private QueueingConsumer consumer;
 	private String receivedMessage;
 
+	
+	
+	
 
 	private void receive(String queueName) throws IOException, ShutdownSignalException, ConsumerCancelledException, InterruptedException{
 		System.out.println("receive()");
