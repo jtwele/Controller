@@ -10,9 +10,9 @@ public class Send {
 		MessageSender sender = new MessageSender();
 
 		try{
-	//	sender.sendToInvoice("Nachricht an InvoiceNinja gesendet");
-//		sender.sendToSugar("Nachricht an Sugar gesendet");
-		sender.sendToWaWision("Nachricht an WaWision gesendet");
+		sender.sendToInvoice("Mustermann 1234 0401234567 Musterstrasse Musterstadt Musterstate 12345 DE Mustermann ogulcan.kurtul@haw-hamburg.de Max Mustermann 0401234567");
+		sender.sendToSugar("Wer das liest ist doof");
+		sender.sendToWaWision("haloooooooooo");
 		}catch( IOException e ){
 		}
 

@@ -82,8 +82,8 @@ public class ControllerRecv {
 
 			ControllerRecv cr = new ControllerRecv();
 			
-//			cr.receiveFromInvoice();
-			cr.receiveFromSugar();
+			cr.receiveFromInvoice();
+//			cr.receiveFromSugar();
 //			cr.receiveFromWaWision();
 
 	}
