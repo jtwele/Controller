@@ -1,6 +1,8 @@
 package send;
 
 import java.io.IOException;
+
+import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -26,6 +28,7 @@ public class MessageSender {
 	private Channel channel;
 	private ConnectionFactory factory;
 	private Connection connection;
+	private static int messageID = 0;
 
 	public MessageSender() {
 		this.factory = new ConnectionFactory();
@@ -77,9 +80,12 @@ public class MessageSender {
 		this.factory.setPassword(password);
 	}
 
+	@SuppressWarnings("static-access")
 	private void publish(String message, String queueName) throws IOException {
 		System.out.println("Sende Nachricht an "+queueName);
-		this.channel.basicPublish("", queueName, null, message.getBytes());
+		AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties().builder();
+	    builder.messageId(Integer.toString(++this.messageID));
+		this.channel.basicPublish("", queueName, builder.build(), message.getBytes());
 	}
 
 	private void closeConnection() throws IOException {

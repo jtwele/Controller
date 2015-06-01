@@ -2,6 +2,8 @@ package send;
 
 import java.io.IOException;
 
+import messages.Messagefactory;
+
 
 public class Send {
 
@@ -12,6 +14,7 @@ public class Send {
 		try{
 	//	sender.sendToInvoice("Nachricht an InvoiceNinja gesendet");
 //		sender.sendToSugar("Nachricht an Sugar gesendet");
+		
 		sender.sendToWaWision("Nachricht an WaWision gesendet");
 		}catch( IOException e ){
 		}
