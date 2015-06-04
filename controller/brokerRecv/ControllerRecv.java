@@ -31,6 +31,7 @@ public class ControllerRecv {
 	
 	
 	public ControllerRecv(){
+		System.out.println("Initialisiert");
 		this.rts = new RecvThreadSugar();
 		this.rtw = new RecvThreadWaWision();
 		this.rti = new RecvThreadInvoice();
@@ -45,16 +46,20 @@ public class ControllerRecv {
 	}
 	
 	private void receiveFromInvoice() throws InterruptedException, IOException {
+		System.out.println("receiveFromInvoice()");
 		this.receive(this.CONTROLLER_QUEUE_INVOICE);
 	}
 	private void receiveFromWaWision() throws InterruptedException, IOException {
+		System.out.println("receiveFromWaWision()");
 		this.receive(this.CONTROLLER_QUEUE_WAWISION);
 	}
 	private void receiveFromSugar() throws InterruptedException, IOException {
+		System.out.println("receiveFromSugar()");
 		this.receive(this.CONTROLLER_QUEUE_SUGAR );
 	}
 
 	public void start(){
+		System.out.println("start()");
 		this.rts.run();
 		this.rtw.run();
 		this.rti.run();
