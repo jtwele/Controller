@@ -2,8 +2,6 @@ package brokerRecv;
 
 import java.io.IOException;
 
-import recv.MessageReceiverInvoice;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -16,16 +14,27 @@ public class ControllerRecv {
 	private final String CONTROLLER_QUEUE_INVOICE = "controllerInvoice";
 	private final String CONTROLLER_QUEUE_SUGAR = "controllerSugar";
 	private final String CONTROLLER_QUEUE_WAWISION = "controllerWaWision";
-
+	private final String HOST = "141.22.29.97";
+	private final String USER = "controller";
+	private final String VHOST = "/";
+	
 	private ConnectionFactory factory;
 	private Connection connection;
 	private Channel channel;
 	private QueueingConsumer consumer;
 	private String receivedMessage;
+	private RecvThreadSugar rts;
+	private RecvThreadWaWision rtw;
+	private RecvThreadInvoice rti;
+	
 
 	
 	
-	
+	public ControllerRecv(){
+		this.rts = new RecvThreadSugar();
+		this.rtw = new RecvThreadWaWision();
+		this.rti = new RecvThreadInvoice();
+	}
 
 	private void receive(String queueName) throws IOException, ShutdownSignalException, ConsumerCancelledException, InterruptedException{
 		System.out.println("receive()");
@@ -34,16 +43,23 @@ public class ControllerRecv {
 		this.declareQueue(queueName);
 		this.receiveMessage();
 	}
-	public void receiveFromInvoice() throws InterruptedException, IOException {
+	
+	private void receiveFromInvoice() throws InterruptedException, IOException {
 		this.receive(this.CONTROLLER_QUEUE_INVOICE);
 	}
-	public void receiveFromWaWision() throws InterruptedException, IOException {
+	private void receiveFromWaWision() throws InterruptedException, IOException {
 		this.receive(this.CONTROLLER_QUEUE_WAWISION);
 	}
-	public void receiveFromSugar() throws InterruptedException, IOException {
+	private void receiveFromSugar() throws InterruptedException, IOException {
 		this.receive(this.CONTROLLER_QUEUE_SUGAR );
 	}
 
+	public void start(){
+		this.rts.run();
+		this.rtw.run();
+		this.rti.run();
+	}
+	
 	public String getReceivedMessage() {
 		return this.receivedMessage;
 	}
@@ -51,10 +67,10 @@ public class ControllerRecv {
 	private void createConnection() throws IOException {
 		System.out.println("create connection");
 		this.factory = new ConnectionFactory();
-		this.factory.setHost("141.22.29.97");
-		this.factory.setUsername("controller");
-		this.factory.setPassword("controller");
-		this.factory.setVirtualHost("/");
+		this.factory.setHost(this.HOST);
+		this.factory.setUsername(this.USER);
+		this.factory.setPassword(this.USER);
+		this.factory.setVirtualHost(this.VHOST);
 		this.connection = factory.newConnection();
 		this.channel = connection.createChannel();
 	}
@@ -77,17 +93,58 @@ public class ControllerRecv {
 			delivery = consumer.nextDelivery();
 			this.receivedMessage = new String(delivery.getBody());
 			System.out.println((++i)+"."+"empfangene nachricht: "+this.receivedMessage);
+		}	
+		
+	}
+	private class RecvThreadInvoice extends Thread{
+		@Override
+		public void run(){
+			try {				
+				receiveFromInvoice();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
 	}
 
+	private class RecvThreadWaWision extends Thread{
+		@Override
+		public void run(){
+			try {
+				receiveFromWaWision();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private class RecvThreadSugar extends Thread{
+		@Override
+		public void run(){
+			try {
+				receiveFromSugar();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public static void main(String[] args) throws InterruptedException, IOException {
 
 			ControllerRecv cr = new ControllerRecv();
-			
-			cr.receiveFromInvoice();
-//			cr.receiveFromSugar();
-//			cr.receiveFromWaWision();
+			cr.start();
 
 	}
 
