@@ -3,6 +3,7 @@ package send;
 import java.io.IOException;
 
 import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -82,10 +83,8 @@ public class MessageSender {
 
 	@SuppressWarnings("static-access")
 	private void publish(String message, String queueName) throws IOException {
-		System.out.println("Sende Nachricht an "+queueName);
-		AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties().builder();
-	    builder.messageId(Integer.toString(++this.messageID));
-		this.channel.basicPublish("", queueName, builder.build(), message.getBytes());
+		BasicProperties props =  new BasicProperties().builder().correlationId("").build();
+		this.channel.basicPublish("", queueName, props, message.getBytes());
 	}
 
 	private void closeConnection() throws IOException {

@@ -1,7 +1,6 @@
 package brokerRecv;
 
 import java.io.IOException;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -10,14 +9,14 @@ import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
 
 public class ControllerRecv {
-	
+
 	private final String CONTROLLER_QUEUE_INVOICE = "controllerInvoice";
 	private final String CONTROLLER_QUEUE_SUGAR = "controllerSugar";
 	private final String CONTROLLER_QUEUE_WAWISION = "controllerWaWision";
 	private final String HOST = "141.22.29.97";
 	private final String USER = "controller";
 	private final String VHOST = "/";
-	
+
 	private ConnectionFactory factory;
 	private Connection connection;
 	private Channel channel;
@@ -26,45 +25,45 @@ public class ControllerRecv {
 	private RecvThreadSugar rts;
 	private RecvThreadWaWision rtw;
 	private RecvThreadInvoice rti;
-	
 
-	
-	
-	public ControllerRecv(){
+	public ControllerRecv() {
 		System.out.println("Initialisiert");
 		this.rts = new RecvThreadSugar();
 		this.rtw = new RecvThreadWaWision();
 		this.rti = new RecvThreadInvoice();
 	}
 
-	private void receive(String queueName) throws IOException, ShutdownSignalException, ConsumerCancelledException, InterruptedException{
+	private void receive(String queueName) throws IOException,
+			ShutdownSignalException, ConsumerCancelledException,
+			InterruptedException {
 		System.out.println("receive()");
 		this.factory = new ConnectionFactory();
 		this.createConnection();
 		this.declareQueue(queueName);
-		this.receiveMessage();
+		this.receiveMessage(queueName);
 	}
-	
+
 	private void receiveFromInvoice() throws InterruptedException, IOException {
 		System.out.println("receiveFromInvoice()");
 		this.receive(this.CONTROLLER_QUEUE_INVOICE);
 	}
+
 	private void receiveFromWaWision() throws InterruptedException, IOException {
 		System.out.println("receiveFromWaWision()");
 		this.receive(this.CONTROLLER_QUEUE_WAWISION);
 	}
+
 	private void receiveFromSugar() throws InterruptedException, IOException {
 		System.out.println("receiveFromSugar()");
-		this.receive(this.CONTROLLER_QUEUE_SUGAR );
+		this.receive(this.CONTROLLER_QUEUE_SUGAR);
 	}
 
-	public void start(){
-		System.out.println("start()");
+	public void start() {
 		this.rts.start();
 		this.rtw.start();
 		this.rti.start();
 	}
-	
+
 	public String getReceivedMessage() {
 		return this.receivedMessage;
 	}
@@ -88,23 +87,50 @@ public class ControllerRecv {
 		this.channel.basicConsume(queuename, true, consumer);
 	}
 
-	private void receiveMessage() throws ShutdownSignalException,
-			ConsumerCancelledException, InterruptedException {
-		int i = 0;
+	private void receiveMessage(String queuename)
+			throws ShutdownSignalException, ConsumerCancelledException,
+			InterruptedException {
 		System.out.println("receive Message");
 		QueueingConsumer.Delivery delivery = null;
 		while (true) {
 			System.out.println("waiting for messages");
 			delivery = consumer.nextDelivery();
-			this.receivedMessage = new String(delivery.getBody());
-			System.out.println((++i)+"."+"empfangene nachricht: "+this.receivedMessage);
-		}	
-		
+			String messageID = delivery.getProperties().getCorrelationId();
+
+			switch (queuename) {
+			case "controllerInvoice":
+				this.barbeiteInvoiceNachricht(new String(delivery.getBody()), messageID);
+				break;
+			case "controllerSugar":
+				this.barbeiteSugarNachricht(new String(delivery.getBody()), messageID);
+				break;
+			case "controllerWaWision":
+				this.barbeiteWaWisionNachricht(new String(delivery.getBody()), messageID);
+				break;
+			default:
+				System.out.println("etwas ist schiefgelaufen");
+				break;
+			}
+		}
+
 	}
-	private class RecvThreadInvoice extends Thread{
+
+	private void barbeiteInvoiceNachricht(String nachricht, String messageID) {
+		// TODO: entgegenkommene Nachricht verarbeiten
+	}
+
+	private void barbeiteSugarNachricht(String nachricht, String messageID) {
+		// TODO: entgegenkommene Nachricht verarbeiten
+	}
+
+	private void barbeiteWaWisionNachricht(String nachricht, String messageID) {
+		// TODO: entgegenkommene Nachricht verarbeiten
+	}
+
+	private class RecvThreadInvoice extends Thread {
 		@Override
-		public void run(){
-			try {				
+		public void run() {
+			try {
 				receiveFromInvoice();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -116,9 +142,9 @@ public class ControllerRecv {
 		}
 	}
 
-	private class RecvThreadWaWision extends Thread{
+	private class RecvThreadWaWision extends Thread {
 		@Override
-		public void run(){
+		public void run() {
 			try {
 				receiveFromWaWision();
 			} catch (InterruptedException e) {
@@ -130,10 +156,10 @@ public class ControllerRecv {
 			}
 		}
 	}
-	
-	private class RecvThreadSugar extends Thread{
+
+	private class RecvThreadSugar extends Thread {
 		@Override
-		public void run(){
+		public void run() {
 			try {
 				receiveFromSugar();
 			} catch (InterruptedException e) {
@@ -145,11 +171,12 @@ public class ControllerRecv {
 			}
 		}
 	}
-	
-	public static void main(String[] args) throws InterruptedException, IOException {
 
-			ControllerRecv cr = new ControllerRecv();
-			cr.start();
+	public static void main(String[] args) throws InterruptedException,
+			IOException {
+
+		ControllerRecv cr = new ControllerRecv();
+		cr.start();
 
 	}
 
