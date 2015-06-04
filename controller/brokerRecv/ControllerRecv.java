@@ -60,9 +60,9 @@ public class ControllerRecv {
 
 	public void start(){
 		System.out.println("start()");
-		this.rts.run();
-		this.rtw.run();
-		this.rti.run();
+		this.rts.start();
+		this.rtw.start();
+		this.rti.start();
 	}
 	
 	public String getReceivedMessage() {
