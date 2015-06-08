@@ -29,7 +29,7 @@ public class MessageSender {
 	private Channel channel;
 	private ConnectionFactory factory;
 	private Connection connection;
-	private static int messageID = 0;
+	private String messageID;
 
 	public MessageSender() {
 		this.factory = new ConnectionFactory();
@@ -83,7 +83,12 @@ public class MessageSender {
 
 	@SuppressWarnings("static-access")
 	private void publish(String message, String queueName) throws IOException {
-		BasicProperties props =  new BasicProperties().builder().correlationId("").build();
+		
+		if(this.messageID.matches(null) /*|| andere Bedingungen*/){
+			this.messageID = java.util.UUID.randomUUID().toString();
+		}
+		
+		BasicProperties props =  new BasicProperties().builder().correlationId(this.messageID).build();
 		this.channel.basicPublish("", queueName, props, message.getBytes());
 	}
 
@@ -91,5 +96,10 @@ public class MessageSender {
 		this.channel.close();
 		this.connection.close();
 	}
+
+	public String getMessageID() {
+		return messageID;
+	}
+	
 
 }
