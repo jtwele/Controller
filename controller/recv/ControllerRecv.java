@@ -1,19 +1,14 @@
-package brokerRecv;
+package recv;
 
 import java.io.IOException;
-
-import javax.xml.soap.MessageFactory;
-
 import messages.Messagefactory;
 import send.MessageSender;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
-import com.sun.java.util.jar.pack.Instruction.Switch;
 
 public class ControllerRecv {
 
@@ -24,7 +19,7 @@ public class ControllerRecv {
 	private final String USER = "controller";
 	private final String VHOST = "/";
 	private MessageSender sender;
-	
+
 	private ConnectionFactory factory;
 	private Connection connection;
 	private Channel channel;
@@ -104,22 +99,19 @@ public class ControllerRecv {
 		while (true) {
 			System.out.println("waiting for messages");
 			delivery = consumer.nextDelivery();
-			
-			if(delivery.getProperties().getCorrelationId().matches(sender.getMessageID())){
-				
-				
-				String[] message = this.createMsgArray(new String(delivery.getBody()), sender.getMessageID());
-				
-				
+
+			if (delivery.getProperties().getCorrelationId()
+					.matches(sender.getMessageID())) {
+				String message = new String(delivery.getBody());
 				switch (queuename) {
 				case "controllerInvoice":
-					this.barbeiteInvoiceNachricht(message);
+					this.barbeiteInvoiceNachricht(message, sender.getMessageID());
 					break;
 				case "controllerSugar":
-					this.barbeiteSugarNachricht(message);
+					this.barbeiteSugarNachricht(message, sender.getMessageID());
 					break;
 				case "controllerWaWision":
-					this.barbeiteWaWisionNachricht(message);
+					this.barbeiteWaWisionNachricht(message, sender.getMessageID());
 					break;
 				default:
 					System.out.println("etwas ist schiefgelaufen");
@@ -130,36 +122,34 @@ public class ControllerRecv {
 
 	}
 
-	
-
 	private String[] createMsgArray(String nachricht, String messageID) {
-		String tmp[] =  nachricht.split(" ");
-		String msg[] = new String [tmp.length+1];
+		String tmp[] = nachricht.split(" ");
+		String msg[] = new String[tmp.length + 2];
 		msg[0] = messageID;
-		for (int i  = 1; i<tmp.length+1; i++){
-			msg[i]=tmp[i-1];
+		for (int i = 2; i < tmp.length + 2; i++) {
+			msg[i] = tmp[i - 2];
 		}
 		return msg;
 	}
 
-	private void barbeiteInvoiceNachricht(String []nachricht) {
-		//TODO: hier wird vorraussichtlich keine nachricht kommen.
-		//		Hšchsten ein Acknowledge
-		
+	private void barbeiteInvoiceNachricht(String nachricht, String messageID) {
+		// TODO: hier wird vorraussichtlich keine nachricht kommen.
+		// Hšchsten ein Acknowledge
+
 	}
 
-	private void barbeiteSugarNachricht(String []nachricht) {
+	private void barbeiteSugarNachricht(String nachricht, String messageID) {
 		/*
 		 * 
 		 */
-		
+
 	}
 
-	private void barbeiteWaWisionNachricht(String []nachricht) {
-		if(true)/*ein Lieferant soll angelegt werden*/{
-			//Parse Nachricht und erstelle je eine passende fŸr sugar und eine fŸr invoice
-			String [] invoiceMsg;
-			this.sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(invoiceMsg));
+	private void barbeiteWaWisionNachricht(String nachricht, String messageID) {
+		if (true)/* ein Lieferant soll angelegt werden */{
+			// Parse Nachricht und erstelle je eine passende fŸr sugar und eine
+			// fŸr invoice
+			this.sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(nachricht, messageID));
 		}
 	}
 
@@ -168,8 +158,7 @@ public class ControllerRecv {
 		public void run() {
 			try {
 				receiveFromInvoice();
-			} catch (IOException|InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
@@ -180,8 +169,7 @@ public class ControllerRecv {
 		public void run() {
 			try {
 				receiveFromWaWision();
-			} catch (IOException|InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
@@ -192,8 +180,7 @@ public class ControllerRecv {
 		public void run() {
 			try {
 				receiveFromSugar();
-			} catch (IOException|InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
@@ -201,10 +188,8 @@ public class ControllerRecv {
 
 	public static void main(String[] args) throws InterruptedException,
 			IOException {
-
 		ControllerRecv cr = new ControllerRecv();
 		cr.start();
-
 	}
 
 }

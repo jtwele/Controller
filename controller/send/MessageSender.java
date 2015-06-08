@@ -76,7 +76,7 @@ public class MessageSender {
 			String password) {
 		System.out.println("setConnectionCerentials()");
 		this.factory = new ConnectionFactory();
-		this.factory.setHost("141.22.29.97");
+		this.factory.setHost(this.INVOICE_HOST);
 		this.factory.setUsername(username);
 		this.factory.setPassword(password);
 	}
