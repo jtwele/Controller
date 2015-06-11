@@ -53,6 +53,7 @@ public class Receiver extends Thread{
 	private void receiveMessage(String queueName) throws ShutdownSignalException, ConsumerCancelledException, InterruptedException, IOException {
 		System.out.println("Warte auf Nachrichten von " + this.queuename);
 		QueueingConsumer.Delivery delivery = this.consumer.nextDelivery();
+		System.out.println("receiveMessage(): CorrelationId: "+delivery.getProperties().getCorrelationId());
 		this.controller.receiveMessage(this.queuename, new String(delivery.getBody()), delivery.getProperties().getCorrelationId());
 		
 	}

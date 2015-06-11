@@ -81,15 +81,15 @@ public class MessageSender {
 		this.factory.setPassword(password);
 	}
 
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "unused" })
 	private void publish(String message, String queueName, String messageID) throws IOException {
-		
-		if(messageID.matches(null) /*|| andere Bedingungen*/){
+		/*
+		if(messageID.matches(null) || andere Bedingungen){
 			this.messageID = java.util.UUID.randomUUID().toString();
 		}else{
 			this.messageID = messageID;
 		}
-		
+		*/
 		BasicProperties props =  new BasicProperties().builder().correlationId(this.messageID).build();
 		this.channel.basicPublish("", queueName, props, message.getBytes());
 	}
