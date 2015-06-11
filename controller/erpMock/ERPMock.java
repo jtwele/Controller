@@ -25,7 +25,7 @@ public class ERPMock {
 	
 
 	private void send(String message) throws IOException {
-		this.setConnectionCredentials("141.22.29.97", "waWisionSender", "waWisionSender");
+		this.setConnectionCredentials("141.22.29.97", "controller", "controller");
 		this.createConnection();
 		this.declareQueue("controllerWaWision");
 		this.publish(message, "controllerWaWision");
