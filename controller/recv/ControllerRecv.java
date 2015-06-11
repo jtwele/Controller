@@ -102,8 +102,7 @@ public class ControllerRecv {
 			System.out.println("waiting for messages");
 			delivery = consumer.nextDelivery();
 
-			if (delivery.getProperties().getCorrelationId()
-					.matches(sender.getMessageID())) {
+			if (true/*delivery.getProperties().getCorrelationId().matches(sender.getMessageID())*/) {
 				String message = new String(delivery.getBody());
 				switch (queuename) {
 				case "controllerInvoice":
