@@ -57,6 +57,7 @@ public class ERPMock {
 
 	private void publish(String message, String queueName) throws IOException {
 		//TODO: MessageID setzen!!!
+		this.messageID = "123";
 		BasicProperties props =  new BasicProperties().builder().correlationId(this.messageID).build();
 		this.channel.basicPublish("", queueName, props, message.getBytes());
 	}
