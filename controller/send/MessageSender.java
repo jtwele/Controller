@@ -35,27 +35,27 @@ public class MessageSender {
 		this.factory = new ConnectionFactory();
 	}
 
-	public void sendToInvoice(String nachricht) throws IOException {
+	public void sendToInvoice(String nachricht, String messageID) throws IOException {
 		this.send(INVOICE_HOST, INVOICE_USER, INVOICE_PW, INVOICE_QUEUE,
-				nachricht);
+				nachricht, messageID);
 	}
 
-	public void sendToSugar(String nachricht) throws IOException {
-		this.send(SUGAR_HOST, SUGAR_USER, SUGAR_PW, SUGAR_QUEUE, nachricht);
+	public void sendToSugar(String nachricht, String messageID) throws IOException {
+		this.send(SUGAR_HOST, SUGAR_USER, SUGAR_PW, SUGAR_QUEUE, nachricht, messageID);
 	}
 
-	public void sendToWaWision(String nachricht) throws IOException {
+	public void sendToWaWision(String nachricht, String messageID) throws IOException {
 		this.send(WAWISION_HOST, WAWISION_USER, WAWISION_PW,
-				WAWISION_QUEUE, nachricht);
+				WAWISION_QUEUE, nachricht, messageID);
 	}
 
 	private void send(String host, String username, String password,
-			String queuename, String nachricht) throws IOException {
+			String queuename, String nachricht, String messageID) throws IOException {
 		System.out.println("send()");
 		this.setConnectionCredentials(host, username, password);
 		this.createConnection();
 		this.declareQueue(queuename);
-		this.publish(nachricht, queuename);
+		this.publish(nachricht, queuename, messageID);
 		this.closeConnection();
 
 	}
@@ -82,10 +82,12 @@ public class MessageSender {
 	}
 
 	@SuppressWarnings("static-access")
-	private void publish(String message, String queueName) throws IOException {
+	private void publish(String message, String queueName, String messageID) throws IOException {
 		
-		if(this.messageID.matches(null) /*|| andere Bedingungen*/){
+		if(messageID.matches(null) /*|| andere Bedingungen*/){
 			this.messageID = java.util.UUID.randomUUID().toString();
+		}else{
+			this.messageID = messageID;
 		}
 		
 		BasicProperties props =  new BasicProperties().builder().correlationId(this.messageID).build();

@@ -1,8 +1,10 @@
 package recv;
 
 import java.io.IOException;
+
 import messages.Messagefactory;
 import send.MessageSender;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -93,7 +95,7 @@ public class ControllerRecv {
 
 	private synchronized void receiveMessage(String queuename)
 			throws ShutdownSignalException, ConsumerCancelledException,
-			InterruptedException {
+			InterruptedException, IOException {
 		System.out.println("receive Message");
 		QueueingConsumer.Delivery delivery = null;
 		while (true) {
@@ -122,15 +124,6 @@ public class ControllerRecv {
 
 	}
 
-	private String[] createMsgArray(String nachricht, String messageID) {
-		String tmp[] = nachricht.split(" ");
-		String msg[] = new String[tmp.length + 2];
-		msg[0] = messageID;
-		for (int i = 2; i < tmp.length + 2; i++) {
-			msg[i] = tmp[i - 2];
-		}
-		return msg;
-	}
 
 	private void barbeiteInvoiceNachricht(String nachricht, String messageID) {
 		// TODO: hier wird vorraussichtlich keine nachricht kommen.
@@ -140,27 +133,37 @@ public class ControllerRecv {
 
 	private void barbeiteSugarNachricht(String nachricht, String messageID) {
 		/*
-		 * 
+		 * hier kommt dann ein lieferant an mit menge, preis, ... 
+		 * Aus den Daten muss dann eine RG. erstellt werden
 		 */
 
 	}
 
-	private void barbeiteWaWisionNachricht(String nachricht, String messageID) {
-		if (true)/* ein Lieferant soll angelegt werden */{
-			// Parse Nachricht und erstelle je eine passende fŸr sugar und eine
-			// fŸr invoice
-			this.sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(nachricht, messageID));
+	private void barbeiteWaWisionNachricht(String nachricht, String messageID) throws IOException {
+		String[] msg = nachricht.split(" ");
+		if (msg[0].matches("create"))/* ein Lieferant soll angelegt werden */{
+			sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), messageID);
+			
+			//this.sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(nachricht, messageID));
+		}else if(msg[0].matches("bestellung")){
+				sender.sendToSugar(Messagefactory.suiteCreateFindSupplierString(msg), messageID);
 		}
 	}
 
 	private class RecvThreadInvoice extends Thread {
 		@Override
 		public void run() {
-			try {
-				receiveFromInvoice();
-			} catch (IOException | InterruptedException e) {
-				e.printStackTrace();
-			}
+			
+				try {
+					receiveFromInvoice();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 		}
 	}
 
@@ -169,7 +172,11 @@ public class ControllerRecv {
 		public void run() {
 			try {
 				receiveFromWaWision();
-			} catch (IOException | InterruptedException e) {
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -180,7 +187,11 @@ public class ControllerRecv {
 		public void run() {
 			try {
 				receiveFromSugar();
-			} catch (IOException | InterruptedException e) {
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
