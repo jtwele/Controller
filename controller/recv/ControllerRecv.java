@@ -127,7 +127,7 @@ public class ControllerRecv {
 
 	private void barbeiteInvoiceNachricht(String nachricht, String messageID) {
 		// TODO: hier wird vorraussichtlich keine nachricht kommen.
-		// Hšchsten ein Acknowledge
+		// Hoechsten ein Acknowledge
 
 	}
 
