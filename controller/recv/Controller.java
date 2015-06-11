@@ -22,9 +22,9 @@ public class Controller {
 	}
 
 	public void start() throws ShutdownSignalException, ConsumerCancelledException, IOException, InterruptedException{
-		new Receiver("controllerInvoice", this);
-		new Receiver("controllerSugar", this);
-		new Receiver("controllerWaWision", this);
+		new Receiver("controllerInvoice", this).start();;
+		new Receiver("controllerSugar", this).start();;
+		new Receiver("controllerWaWision", this).start();;
 	}
 
 	public String getReceivedMessage() {

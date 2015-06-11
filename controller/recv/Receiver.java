@@ -11,35 +11,43 @@ import com.rabbitmq.client.ShutdownSignalException;
 
 import send.MessageSender;
 
-public class Receiver {
+public class Receiver extends Thread{
 
 	private final String queuename;
 	private final String HOST = "141.22.29.97";
 	private final String USER = "controller";
 	private final String VHOST = "/";
-	private MessageSender sender;
 
 	private ConnectionFactory factory;
 	private Connection connection;
 	private Channel channel;
 	private QueueingConsumer consumer;
-	private String receivedMessage;
 	private Controller controller;
 	
 	public Receiver(String queuename, Controller controller) throws ShutdownSignalException, ConsumerCancelledException, IOException, InterruptedException{
 		this.queuename=queuename;
 		this.controller = controller;
-		this.receive(queuename);
+		
 	}
-
 	
-	private void receive(String queueName) throws IOException,
+	@Override
+	public void run(){
+		try {
+			this.receive();
+		} catch (ShutdownSignalException | ConsumerCancelledException
+				| IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void receive() throws IOException,
 			ShutdownSignalException, ConsumerCancelledException,
 			InterruptedException {
 		this.factory = new ConnectionFactory();
 		this.createConnection();
-		this.declareQueue(queueName);
-		this.receiveMessage(queueName);
+		this.declareQueue(this.queuename);
+		this.receiveMessage(this.queuename);
 	}
 	
 	private void receiveMessage(String queueName) throws ShutdownSignalException, ConsumerCancelledException, InterruptedException, IOException {
