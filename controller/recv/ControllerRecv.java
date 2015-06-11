@@ -88,20 +88,19 @@ public class ControllerRecv {
 	private void declareQueue(String queuename) throws IOException {
 		System.out.println("declare queue");
 		this.channel.queueDeclare(queuename, false, false, false, null);
-		System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 		consumer = new QueueingConsumer(channel);
 		this.channel.basicConsume(queuename, true, consumer);
+		System.out.println("ceblareQueueu() abgeschlossen ");
 	}
 
 	private void receiveMessage(String queuename)
 			throws ShutdownSignalException, ConsumerCancelledException,
 			InterruptedException, IOException {
-		System.out.println("receive Message");
 		QueueingConsumer.Delivery delivery = null;
 		while (true) {
 			System.out.println("waiting for messages");
 			delivery = consumer.nextDelivery();
-
+			System.out.println("***************nachricht empfangen von : "+queuename+" ************");
 			if (true/*delivery.getProperties().getCorrelationId().matches(sender.getMessageID())*/) {
 				String message = new String(delivery.getBody());
 				switch (queuename) {
