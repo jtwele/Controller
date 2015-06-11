@@ -72,7 +72,7 @@ public class ERPMock {
 		// String zum erstellen eines Lieferanten bauen 
 		erp.sendCreateSupllierMsg("create Firmenname "
 				+ "Vorname Nachname Mail Telefon "
-				+ "Stra§e Stadt Bundesland PLZ Land");
+				+ "Strasse Stadt Bundesland PLZ Land");
 		/*
 		 *  sugar brauch: 
 		 *  NachrichtenTyp (bestellung), kategorie (Fahrradzubehoer), produkt (Sattel), menge (13)
