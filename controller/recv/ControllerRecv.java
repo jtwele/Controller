@@ -93,7 +93,7 @@ public class ControllerRecv {
 		this.channel.basicConsume(queuename, true, consumer);
 	}
 
-	private synchronized void receiveMessage(String queuename)
+	private void receiveMessage(String queuename)
 			throws ShutdownSignalException, ConsumerCancelledException,
 			InterruptedException, IOException {
 		System.out.println("receive Message");
