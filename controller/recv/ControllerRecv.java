@@ -32,7 +32,6 @@ public class ControllerRecv {
 	private RecvThreadInvoice rti;
 
 	public ControllerRecv() {
-		System.out.println("Initialisiert");
 		this.sender = new MessageSender();
 		this.rts = new RecvThreadSugar();
 		this.rtw = new RecvThreadWaWision();
@@ -42,7 +41,6 @@ public class ControllerRecv {
 	private void receive(String queueName) throws IOException,
 			ShutdownSignalException, ConsumerCancelledException,
 			InterruptedException {
-		System.out.println("receive()");
 		this.factory = new ConnectionFactory();
 		this.createConnection();
 		this.declareQueue(queueName);
@@ -75,7 +73,6 @@ public class ControllerRecv {
 	}
 
 	private void createConnection() throws IOException {
-		System.out.println("create connection");
 		this.factory = new ConnectionFactory();
 		this.factory.setHost(this.HOST);
 		this.factory.setUsername(this.USER);
@@ -86,11 +83,9 @@ public class ControllerRecv {
 	}
 
 	private void declareQueue(String queuename) throws IOException {
-		System.out.println("declare queue");
 		this.channel.queueDeclare(queuename, false, false, false, null);
 		consumer = new QueueingConsumer(channel);
 		this.channel.basicConsume(queuename, true, consumer);
-		System.out.println("ceblareQueueu() abgeschlossen ");
 	}
 
 	private void receiveMessage(String queuename)

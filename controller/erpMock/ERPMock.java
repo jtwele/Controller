@@ -35,20 +35,16 @@ public class ERPMock {
 	
 	private void createConnection() throws IOException {
 		this.connection = factory.newConnection();
-		System.out.println("connection" + this.connection);
 		this.channel = this.connection.createChannel();
 		
 	}
 
 	private void declareQueue(String queueName) throws IOException {
-		System.out.println("declareQueue()");
 		this.channel.queueDeclare(queueName, false, false, false, null);
-		System.out.println("ENDE declareQueue()");
 	}
 
 	private void setConnectionCredentials( String host, String username,
 			String password) {
-		System.out.println("setConnectionCerentials()");
 		this.factory = new ConnectionFactory();
 		this.factory.setHost(host);
 		this.factory.setUsername(username);
@@ -65,6 +61,7 @@ public class ERPMock {
 	private void closeConnection() throws IOException {
 		this.channel.close();
 		this.connection.close();
+		System.out.println("****** Nachricht wurde versendet ********");
 	}
 	
 	public static void main(String[] args) throws IOException{
