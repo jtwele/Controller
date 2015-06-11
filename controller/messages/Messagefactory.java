@@ -4,9 +4,9 @@ public class Messagefactory {
 	
 	/**
 	 * This method creates two types of messages. 
-	 * CreateClient(); benštigte Parameter: { 
+	 * CreateClient(); benoetigte Parameter: { 
 	 * Firmenname, Kontakt: Vorname, Nachname, Mail, Telefon, Stra§e, Stadt, Bundesland, PLZ, Land }
-	 * createInvoice(); benštigte Parameter: { Productkey, Produktbeschreibung, Preis, Menge }
+	 * createInvoice(); benoetigte Parameter: { Productkey, Produktbeschreibung, Preis, Menge }
 	 * 
 	 * @param  String[] message, String msgType
 	 * @return for InvoiceNinja converted message
