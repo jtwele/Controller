@@ -55,6 +55,7 @@ public class MsgWrapper {
     	return invoiceMsg("companyName", "itemNr", "product", "price", "quantity");
     }
     
+    
     private static String[] invoiceMsg(String companyName, String itemNr, String product, String price, String quantity){
     	String[] msg  = new String[6];
     	msg[0] = "rechnung";
