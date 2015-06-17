@@ -7,6 +7,8 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.AMQP.BasicProperties;
 
+import crm.MsgWrapper;
+
 // Nachrichten an controllerWaWision Queue senden 
 public class ERPMock {
 	
@@ -15,16 +17,25 @@ public class ERPMock {
 	private Connection connection;
 	private String messageID;
 	
-	public void sendCreateSupllierMsg(String message) throws IOException{
-		this.send(message);
+	
+	public ERPMock(){
+		new ERPreceive(this).start(); 
 	}
 
-	public void sendFindSupplier(String message) throws IOException{
-			this.send(message);
+	
+	/**
+	 * Bearbeitet die einkommende Nachricht, die ursprünglich von sugar kommt.
+	 * Es kann nur eine bestellung sein!!! Diese wird für InvoiceNinja geparst und versendet.
+	 * @param msg
+	 * @throws IOException 
+	 */
+	public void handleIncomingMessage(String msg) throws IOException{
+			String[] message = MsgWrapper.createInvoiceMsg(msg);
+			this.send(message[0]+", "+message[1] + ", " +message[2] +", "+message[3]+", " +message[4]);
 	}
 	
-
-	private void send(String message) throws IOException {
+	
+	public void send(String message) throws IOException {
 		this.setConnectionCredentials("141.22.29.97", "wawisionSender", "wawisionSender");
 		this.createConnection();
 		this.declareQueue("controllerWaWision");
@@ -66,17 +77,18 @@ public class ERPMock {
 	
 	public static void main(String[] args) throws IOException{
 		ERPMock erp = new ERPMock();
-		
-		// String zum erstellen eines Lieferanten bauen 
-		erp.sendCreateSupllierMsg("create Firmenname2 "
-				+ "Vorname2 Nachname2 Mail@mail.com Telefon2 "
-				+ "Strasse2 Stadt2 Bundesland2 PLZ2 Land2");
 		/*
-		 *  sugar brauch: 
-		 *  NachrichtenTyp (bestellung), kategorie (Fahrradzubehoer), produkt (Sattel), menge (13)
+		 * erp Nachrichten: Bestellung
+		 * 
+		 *  erstelle Rechnung
+		 *  
+		 *  erstelle Lieferanten
 		 */
-		 //erp.sendFindSupplier("bestellung Fahradzubehoer Sattel 13");
-
+		String msg = "";
+		for (int i=0; i<args.length;i++){
+			msg+=args[i]+" ";
+		}
+		erp.send(msg);
 		
 	}
 	

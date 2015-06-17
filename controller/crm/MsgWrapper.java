@@ -38,7 +38,35 @@ public class MsgWrapper {
 
         return msg.toString();
     }
+    
+    public static String createSupplierMsg(){
+    	
+    	return "";
+    }
 
+    /**
+     * Formats the incoming message containing the findSupplier() reply of the CRM
+     * @param msg
+     * @return msg[] for creating an invoice with Invoice Ninja
+     */
+    public static String[] createInvoiceMsg(String msg){
+    	//TODO: Filter the the parameters for the invoiceMsg() function.
+    	
+    	return invoiceMsg("companyName", "itemNr", "product", "price", "quantity");
+    }
+    
+    private static String[] invoiceMsg(String companyName, String itemNr, String product, String price, String quantity){
+    	String[] msg  = new String[6];
+    	msg[0] = "rechnung";
+    	msg[1] = companyName;
+    	msg[2] = itemNr;
+    	msg[3] = product;
+    	msg[4] = String.valueOf(price);
+    	msg[5] = String.valueOf(quantity);
+    	return msg;
+    }
+    
+    
     // TODO: ggf. Antworten parsen und in einfachen String umwandeln
     public static void main(String[] args) {
 
@@ -48,4 +76,6 @@ public class MsgWrapper {
         String findSupplier = findSupplierMsg("Fahrradzubehoer", "Sattel Men", 10);
         System.out.println(findSupplier);
     }
+    
+    
 }

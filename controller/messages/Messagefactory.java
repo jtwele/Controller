@@ -15,25 +15,10 @@ public class Messagefactory {
 	public static String CreateInvoiceMessage(String[] message){
 		String msg = "";
 		for(int i = 0; i<message.length;i++){
-			msg+=message[i]+ " "; 
+			msg+=message[i]+ ", "; 
 		}
 		return msg;
 	}
 	
 	
-	public static String suiteCreate(String[] message){
-		return message[0];
-	}
-	
-	public static String suiteCreateFindSupplierString(String[] findSupplier){
-		//TODO: Richtig formatieren.
-		return "{\n"
-				+ "\"type\": \""+findSupplier[0]+"\","
-				+ "\n\"inhalt\": {"
-				+ "\n\t\"kategorie\": \""+findSupplier[1]+"\","
-				+ "\n\t\"produkt\": \""+findSupplier[2]+"\","
-				+ "\n\t\"menge\": "+findSupplier[3]+" "
-				+ "\n\t}"
-				+ "\n}";
-	}
 }
