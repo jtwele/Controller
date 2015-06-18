@@ -85,7 +85,9 @@ public class Controller {
 				//	sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), this.sender.getMessageID());
 				break;
 			case("rechnung"): //rechnung erstellen
-				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), this.sender.getMessageID());
+				System.out.println("bearbeite nachricht: " + nachricht + "\n");
+				sender.sendToInvoice("FirmaCC, 567, Lenker, 24.99, 7s", this.sender.getMessageID());
+				//sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), this.sender.getMessageID());
 				break;
 		}
 	}
