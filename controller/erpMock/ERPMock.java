@@ -18,8 +18,10 @@ public class ERPMock {
 	private String messageID;
 	
 	
-	public ERPMock(){
-		new ERPreceive(this).start(); 
+	public ERPMock(String type){
+		if(type.matches("bestellung")){			
+			new ERPreceive(this).start(); 
+		}
 	}
 
 	
@@ -77,7 +79,7 @@ public class ERPMock {
 	}
 	
 	public static void main(String[] args) throws IOException{
-		ERPMock erp = new ERPMock();
+		ERPMock erp = new ERPMock(args[0]);
 		/*
 		 * erp Nachrichten: Bestellung
 		 * 
