@@ -86,7 +86,7 @@ public class Controller {
 				break;
 			case("rechnung"): //rechnung erstellen
 				System.out.println("bearbeite nachricht: " + nachricht + "\n");
-				sender.sendToInvoice("FirmaCC, 567, Lenker, 24.99, 7s", this.sender.getMessageID());
+				sender.sendToInvoice("rechnung, FirmaCC, 567, Lenker, 24.99, 7s", this.sender.getMessageID());
 				//sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), this.sender.getMessageID());
 				break;
 		}
