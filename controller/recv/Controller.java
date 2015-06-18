@@ -73,7 +73,6 @@ public class Controller {
 	private void barbeiteWaWisionNachricht(String nachricht, String messageID) throws IOException {
 		String[] msg = nachricht.split(", ");
 		System.out.println("nachricht: " + nachricht);
-		System.out.println("nachrichtentyp: "+msg[0]);
 		switch(msg[0]){
 			case "anlegen": // Produkt anlegen
 				//sender.sendToSugar(MsgWrapper.createProductMsg(msg[1], msg[2]), this.sender.getMessageID());

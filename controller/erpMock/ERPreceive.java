@@ -13,9 +13,9 @@ import com.rabbitmq.client.ShutdownSignalException;
 
 public class ERPreceive extends Thread{
 	
-	private final String queuename = "waWision";
+	private final String queuename = "wawision";
 	private final String HOST = "141.22.29.97";
-	private final String USER = "waWision";
+	private final String USER = "wawision";
 	private final String VHOST = "/";
 
 	private ConnectionFactory factory;
