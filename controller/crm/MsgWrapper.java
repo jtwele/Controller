@@ -96,7 +96,7 @@ public class MsgWrapper {
         String createProduct = createProductMsg("Sattel Men", "Fahrradzubehoer");
         System.out.println(createProduct);
 
-        String findSupplier = findSupplierMsg("Fahrradzubehoer", "Sattel Men", 10);
+        String findSupplier = findSupplierMsg("Fahrradzubehoer", "Sattel Men", 80);
         System.out.println(findSupplier);
 
         String findSupplierReply = "{\"type\":\"bestellung\",\"inhalt\":{\"kategorie\":\"Fahrradzubehoer\",\"produkt\":\"Sattel Men\",\"menge\":80,\"return\":[{\"persoenliche Daten\":{\"titel\":\"\",\"anrede\":\"Dr.\",\"vorname\":\"Hannah\",\"nachname\":\"M\\u00fcller\",\"telefonnr\":\"08935641131\",\"mobile\":\"017692698888 \",\"email\":\"hannah@mueller.de\"},\"adresse\":{\"strasse\":\"Rotkreuzplatz 11\",\"stadt\":\"M\\u00fcnchen\",\"plz\":\"80311\",\"bundesland\":\"Bayern\",\"staat\":\"Deutschland\"},\"bestellung\":{\"productId\":\"1131a5ab-b694-b6fe-d5ae-556431c58d0a\",\"menge\":30,\"preis\":\"25.990000\"}}]}}";
