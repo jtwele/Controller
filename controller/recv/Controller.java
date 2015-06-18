@@ -75,14 +75,14 @@ public class Controller {
 		
 		switch(msg[0]){
 			case "anlegen": // Produkt anlegen
-				sender.sendToSugar(MsgWrapper.createProductMsg(msg[1], msg[2]), this.sender.getMessageID());
+				//sender.sendToSugar(MsgWrapper.createProductMsg(msg[1], msg[2]), this.sender.getMessageID());
 				break;
 			case("neu"): //Lieferant anlegen
 				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), sender.getMessageID());
-				sender.sendToSugar(MsgWrapper.createSupplierMsg(), messageID);
+				//sender.sendToSugar(MsgWrapper.createSupplierMsg(), messageID);
 				break;
 			case("bestellung")://Lieferant(-en) für Bestellung suchen
-					sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), this.sender.getMessageID());
+				//	sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), this.sender.getMessageID());
 				break;
 			case("rechnung"): //rechnung erstellen
 				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), this.sender.getMessageID());
