@@ -32,7 +32,7 @@ public class ERPMock {
 	public void handleIncomingMessage(String msg) throws IOException{
 			String[] message = MsgWrapper.createInvoiceMsg(msg);
 			//this.send(message[0]+", "+message[1] + ", " +message[2] +", "+message[3]+", " +message[4]);
-			this.send("FirmaAA"+", "+"12345" + ", " +"Lenker" +", "+"24,99"+", " +"7");
+			this.send("FirmaBB"+", "+"12345" + ", " +"Lenker" +", "+"24,99"+", " +"7");
 	}
 	
 	
