@@ -43,6 +43,7 @@ public class Controller {
 					this.barbeiteSugarNachricht(message, sender.getMessageID());
 					break;
 				case "controllerWaWision":
+					System.out.println("*********** correlationID: "+sender.getMessageID() );
 					this.barbeiteWaWisionNachricht(message, sender.getMessageID());
 					break;
 				default:
