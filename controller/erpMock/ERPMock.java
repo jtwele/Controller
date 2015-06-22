@@ -34,6 +34,7 @@ public class ERPMock {
 	 */
 	public void handleIncomingMessage(String msg) throws IOException{
 			String[] message = MsgWrapper.createInvoiceMsg(msg);
+			System.out.println("Antwort von suagr aus bestellung:" + msg);
 			this.send(message[0]+", "+message[1] + ", " +message[2] +", "+message[3]+", " +message[4]);
 			//this.send("FirmaBB"+", "+"12345" + ", " +"Lenker" +", "+"24,99"+", " +"7");
 	}

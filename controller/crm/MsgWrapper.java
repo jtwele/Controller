@@ -69,7 +69,7 @@ public class MsgWrapper {
             JsonObject order = jsonObject.getJsonObject("inhalt").getJsonArray("return")
                     .getJsonObject(0).getJsonObject("bestellung");
 
-            String companyName = company.getString("vorname") + " " + company.getString("nachname");
+            String companyName = company.getString("nachname");
             String itemNr = order.getString("productId");
             String product = jsonObject.getJsonObject("inhalt").getString("produkt");
             String price = order.getString("preis");
