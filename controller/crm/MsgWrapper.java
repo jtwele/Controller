@@ -74,14 +74,14 @@ public class MsgWrapper {
             String itemNr = order.getString("productId");
             String product = jsonObject.getJsonObject("inhalt").getString("produkt");
             String price = order.getString("preis");
-            int quantity = Integer.valueOf(order.getInt("menge"));    
+            String quantity = order.getInt("menge")+"";    
             System.out.println("Vom sugar uebergebene Menge: " + quantity);
 
             return invoiceMsg(companyName, itemNr, product, price, quantity);
         }       
     }
 
-    private static String[] invoiceMsg(String companyName, String itemNr, String product, String price, int quantity) {
+    private static String[] invoiceMsg(String companyName, String itemNr, String product, String price, String quantity) {
         String[] msg = new String[6];
         msg[0] = "rechnung";
         msg[1] = companyName;
