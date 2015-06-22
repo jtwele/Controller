@@ -40,11 +40,10 @@ public class Controller {
 			if (true/*delivery.getProperties().getCorrelationId().matches(sender.getMessageID())*/) {
 				switch (queuename) {
 				case "controllerSugar":
-					this.barbeiteSugarNachricht(message, sender.getMessageID());
+					this.barbeiteSugarNachricht(message, messageID);
 					break;
 				case "controllerWaWision":
-					
-					this.barbeiteWaWisionNachricht(message, sender.getMessageID());
+					this.barbeiteWaWisionNachricht(message, messageID);
 					break;
 				default:
 					System.out.println("etwas ist schiefgelaufen");
@@ -76,21 +75,21 @@ public class Controller {
 		System.out.println("nachricht: " + nachricht);
 		switch(msg[0]){
 			case "anlegen": // Produkt anlegen
-				sender.sendToSugar(MsgWrapper.createProductMsg(msg[1], msg[2]), this.sender.getMessageID());
+				sender.sendToSugar(MsgWrapper.createProductMsg(msg[1], msg[2]), messageID);
 				break;
 			case("neu"): //Lieferant anlegen
-				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), sender.getMessageID());
+				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), messageID);
 				sender.sendToSugar(MsgWrapper.createSupplierMsg(), messageID);
 				break;
 			case("bestellung")://Lieferant(-en) für Bestellung suchen
 				msg[3] = msg[3].trim();
 			System.out.println("**************** " + msg[3] + " *********************");
-				sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), this.sender.getMessageID());
+				sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), messageID);
 				break;
 			case("rechnung"): //rechnung erstellen
 				System.out.println("bearbeite nachricht: " + nachricht + "\n");
 //				sender.sendToInvoice("rechnung, FirmaCC, 567, Lenker, 24.99, 7s", this.sender.getMessageID());
-				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), this.sender.getMessageID());
+				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), messageID);
 				break;
 		}
 	}
