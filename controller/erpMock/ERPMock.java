@@ -19,7 +19,8 @@ public class ERPMock {
 	
 	
 	public ERPMock(String type){
-		if(type.matches("bestellung")){			
+		if(type.matches("bestellung")){	
+			System.out.println("\n Bestellung eingegangen \n");
 			new ERPreceive(this).start(); 
 		}
 	}
