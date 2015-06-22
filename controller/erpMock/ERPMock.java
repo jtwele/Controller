@@ -81,7 +81,7 @@ public class ERPMock {
 	
 	public static void main(String[] args) throws IOException{
 		System.out.println("NachrichtenTyp: "+ args[0]);
-		ERPMock erp = new ERPMock(args[0]);
+		ERPMock erp = new ERPMock(args[0].split(",")[0]);
 		/*
 		 * erp Nachrichten: Bestellung
 		 * 
