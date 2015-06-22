@@ -29,7 +29,6 @@ public class Receiver extends Thread {
 			IOException, InterruptedException {
 		this.queuename = queuename;
 		this.controller = controller;
-
 	}
 
 	@Override
