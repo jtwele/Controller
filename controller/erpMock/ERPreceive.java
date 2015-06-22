@@ -52,6 +52,7 @@ public class ERPreceive extends Thread{
 			throws ShutdownSignalException, ConsumerCancelledException,
 			InterruptedException, IOException {
 		while(true){
+			System.out.println("waiting for incoming messages");
 			QueueingConsumer.Delivery delivery = this.consumer.nextDelivery();		
 			this.erp.handleIncomingMessage(new String(delivery.getBody()));
 			System.out.println("Incoming message: " + new String(delivery.getBody()));

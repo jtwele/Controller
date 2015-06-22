@@ -81,7 +81,7 @@ public class MessageSender {
 		this.factory.setPassword(password);
 	}
 
-	@SuppressWarnings({ "unused" })
+	
 	private void publish(String message, String queueName, String messageID) throws IOException {
 		/*
 		if(messageID.matches(null) || andere Bedingungen){
