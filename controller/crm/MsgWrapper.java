@@ -74,7 +74,7 @@ public class MsgWrapper {
             String itemNr = order.getString("productId");
             String product = jsonObject.getJsonObject("inhalt").getString("produkt");
             String price = order.getString("preis");
-            String quantity = order.getInt("menge")+"";    
+            String quantity = String.valueOf(order.getInt("menge"));    
             System.out.println("Vom sugar uebergebene Menge: " + quantity);
 
             return invoiceMsg(companyName, itemNr, product, price, quantity);
