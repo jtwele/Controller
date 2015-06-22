@@ -40,6 +40,7 @@ public class Controller {
 			if (true/*delivery.getProperties().getCorrelationId().matches(sender.getMessageID())*/) {
 				switch (queuename) {
 				case "controllerSugar":
+					System.out.println("receiveMessage(): controllerSugar");
 					this.barbeiteSugarNachricht(message, messageID);
 					break;
 				case "controllerWaWision":
