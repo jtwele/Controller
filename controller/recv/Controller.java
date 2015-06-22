@@ -58,10 +58,10 @@ public class Controller {
 	private void barbeiteSugarNachricht(String nachricht, String messageID) throws IOException {
 		String[] msg = nachricht.split(" ");
 		System.out.println("BearbeiteSugarNachricht(): Nachrichtentyp: " +msg[0] );
-		if(msg[0].matches("bestellung")){
+	//	if(msg[0].matches("bestellung")){
 			// TODO: Nachricht für WaWision parsen. Wird erstmal nicht gemacht, sondern nur durchgereicht 
 			sender.sendToWaWision(nachricht, messageID);
-		}
+		//}
 
 	}
 
