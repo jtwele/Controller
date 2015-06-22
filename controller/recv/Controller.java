@@ -82,8 +82,9 @@ public class Controller {
 				sender.sendToSugar(MsgWrapper.createSupplierMsg(), messageID);
 				break;
 			case("bestellung")://Lieferant(-en) für Bestellung suchen
-				System.out.println("**************** " + msg[3] + " *********************");
-					sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), this.sender.getMessageID());
+				msg[3] = msg[3].trim();
+			System.out.println("**************** " + msg[3] + " *********************");
+				sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), this.sender.getMessageID());
 				break;
 			case("rechnung"): //rechnung erstellen
 				System.out.println("bearbeite nachricht: " + nachricht + "\n");
