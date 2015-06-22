@@ -1,3 +1,5 @@
 *.class
 /nbproject/private/
 /build
+controller/libs/
+libs/tmp
