@@ -40,11 +40,10 @@ public class Controller {
 			if (true/*delivery.getProperties().getCorrelationId().matches(sender.getMessageID())*/) {
 				switch (queuename) {
 				case "controllerSugar":
-					this.barbeiteSugarNachricht(message, sender.getMessageID());
+					this.barbeiteSugarNachricht(message, messageID);
 					break;
 				case "controllerWaWision":
-					System.out.println("*********** correlationID: "+sender.getMessageID() );
-					this.barbeiteWaWisionNachricht(message, sender.getMessageID());
+					this.barbeiteWaWisionNachricht(message, messageID);
 					break;
 				default:
 					System.out.println("etwas ist schiefgelaufen");
