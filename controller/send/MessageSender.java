@@ -90,6 +90,7 @@ public class MessageSender {
 			this.messageID = messageID;
 		}
 		*/
+		System.out.println("*********** correlationID: "+ messageID);
 		BasicProperties props =  new BasicProperties().builder().correlationId(this.messageID).build();
 		this.channel.basicPublish("", queueName, props, message.getBytes());
 	}
