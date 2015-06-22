@@ -53,7 +53,8 @@ public class ERPreceive extends Thread{
 			InterruptedException, IOException {
 		while(true){
 			QueueingConsumer.Delivery delivery = this.consumer.nextDelivery();		
-			this.erp.handleIncomingMessage(new String(delivery.getBody()));			
+			this.erp.handleIncomingMessage(new String(delivery.getBody()));
+			System.out.println("Incoming message: " + new String(delivery.getBody()));
 		}
 	}
 
