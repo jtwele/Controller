@@ -57,6 +57,7 @@ public class MsgWrapper {
     public static String[] createInvoiceMsg(String msg) {
         //TODO: Filter the the parameters for the invoiceMsg() function.
 
+    	System.out.println("createInvoice(): empfangen: "+msg );
         if ("error".equalsIgnoreCase(msg)) {
             throw new IllegalArgumentException("WTF");
         }
