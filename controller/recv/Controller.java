@@ -94,6 +94,8 @@ public class Controller {
 //				sender.sendToInvoice("rechnung, FirmaCC, 567, Lenker, 24.99, 7s", this.sender.getMessageID());
 				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), messageID);
 				break;
+			default:
+				System.println("Produkt nicht vorhanden");
 		}
 	}
 
