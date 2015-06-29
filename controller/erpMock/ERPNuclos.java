@@ -86,7 +86,7 @@ public class ERPNuclos {
 	}
 	
 	public static void main(String[] args) throws IOException{
-		final ERPNuclos erp = new ERPNuclos(args[0]);
+		//final ERPNuclos erp = new ERPNuclos(args[0]);
 		/*
 		 * erp Nachrichten: Bestellung
 		 * 
@@ -109,9 +109,10 @@ public class ERPNuclos {
 						String s = "";
 						String buff = read.readLine();
 						while (buff != null) {
-							buff = read.readLine();
+						//	buff = read.readLine();
 							if (buff != null && !buff.equals("null")) {
 								s = s + buff;
+								System.out.println(s);
 							}
 						}
 						System.out.println(s);
