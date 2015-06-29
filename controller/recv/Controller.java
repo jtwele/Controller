@@ -74,9 +74,15 @@ public class Controller {
 	
 	*/
 	private void barbeiteWaWisionNachricht(String nachricht, String messageID) throws IOException {
-		String inv = nachricht.split(";")[0];
-		String sug = nachricht.split(";")[1];
-		String[] s = sug.split(", ");
+		
+		String inv = "";
+		String sug = "";
+		String[] s = null;
+		if(nachricht.contains(";")){			
+			inv = nachricht.split(";")[0];
+			sug = nachricht.split(";")[1];
+			s = sug.split(", ");
+		}
 
 
 		String[] msg = nachricht.split(", ");
@@ -96,7 +102,6 @@ public class Controller {
 				break;
 			case("bestellung")://Lieferant(-en) für Bestellung suchen
 				msg[3] = msg[3].trim();
-			System.out.println("**************** " + msg[3] + " *********************");
 				sender.sendToSugar(MsgWrapper.findSupplierMsg(msg[1], msg[2], Integer.valueOf(msg[3])), messageID);
 				break;
 			case("rechnung"): //rechnung erstellen
