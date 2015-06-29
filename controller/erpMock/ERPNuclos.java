@@ -26,9 +26,9 @@ public class ERPNuclos {
 	
 	
 	public ERPNuclos(String type){
-		if(type.matches("bestellung")){			
+		//if(type.matches("bestellung")){			
 			new ERPreceive2(this).start(); 
-		}
+		//}
 	}
 
 	
