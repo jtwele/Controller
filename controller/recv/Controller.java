@@ -82,7 +82,7 @@ public class Controller {
 				break;
 			case("neu"): //Lieferant anlegen
 				sender.sendToInvoice(Messagefactory.CreateInvoiceMessage(msg), messageID);
-				sender.sendToSugar(MsgWrapper.createSupplierMsg(), messageID);
+				//sender.sendToSugar(MsgWrapper.createSupplierMsg(), messageID);
 				break;
 			case("bestellung")://Lieferant(-en) für Bestellung suchen
 				msg[3] = msg[3].trim();
