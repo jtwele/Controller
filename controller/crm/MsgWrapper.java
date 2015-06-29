@@ -42,9 +42,28 @@ public class MsgWrapper {
         return msg.toString();
     }
 
-    public static String createSupplierMsg() {
+    public static String createSupplierMsg(String title, String anrede, String first_name,
+            String last_name, String phone, String mobile, String mail,
+            String strasse, String stadt, String plz, String bundesland, String staat) {
+        JsonObject msg = Json.createObjectBuilder()
+                .add("type", "lieferant_anlegen")
+                .add("inhalt", Json.createArrayBuilder()
+                        .add(Json.createObjectBuilder()
+                                .add("title", title)
+                                .add("anrede", anrede)
+                                .add("first_name", first_name)
+                                .add("last_name", last_name)
+                                .add("phone", phone)
+                                .add("mobile", mobile)
+                                .add("mail", mail)
+                                .add("strasse", strasse)
+                                .add("stadt", stadt)
+                                .add("plz", plz)
+                                .add("bundesland", bundesland)
+                                .add("staat", staat)))
+                .build();
 
-        return "";
+        return msg.toString();
     }
 
     /**
@@ -100,6 +119,10 @@ public class MsgWrapper {
 
         String findSupplier = findSupplierMsg("Fahrradzubehoer", "Sattel Men", 80);
         System.out.println(findSupplier);
+
+        String createSupplier = createSupplierMsg("title", "anrede", "firstname", "lastname", "phone", "mobiel",
+                "mail", "strasse", "stadt", "plz", "bundesland", "staat");
+        System.out.println(createSupplier);
 
         String findSupplierReply = "{\"type\":\"bestellung\",\"inhalt\":{\"kategorie\":\"Fahrradzubehoer\",\"produkt\":\"Sattel Men\",\"menge\":80,\"return\":[{\"persoenliche Daten\":{\"titel\":\"\",\"anrede\":\"Dr.\",\"vorname\":\"Hannah\",\"nachname\":\"M\\u00fcller\",\"telefonnr\":\"08935641131\",\"mobile\":\"017692698888 \",\"email\":\"hannah@mueller.de\"},\"adresse\":{\"strasse\":\"Rotkreuzplatz 11\",\"stadt\":\"M\\u00fcnchen\",\"plz\":\"80311\",\"bundesland\":\"Bayern\",\"staat\":\"Deutschland\"},\"bestellung\":{\"productId\":\"1131a5ab-b694-b6fe-d5ae-556431c58d0a\",\"menge\":30,\"preis\":\"25.990000\"}}]}}";
 
