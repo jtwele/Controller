@@ -6,11 +6,18 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.AMQP.BasicProperties;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 
 import crm.MsgWrapper;
 
 // Nachrichten an controllerWaWision Queue senden 
-public class ERPMock {
+public class ERPNuclos {
 	
 	private Channel channel;
 	private ConnectionFactory factory;
@@ -18,9 +25,9 @@ public class ERPMock {
 	private String messageID;
 	
 	
-	public ERPMock(String type){
+	public ERPNuclos(String type){
 		if(type.matches("bestellung")){			
-			new ERPreceive(this).start(); 
+			new ERPreceive2(this).start(); 
 		}
 	}
 
@@ -79,7 +86,7 @@ public class ERPMock {
 	}
 	
 	public static void main(String[] args) throws IOException{
-		ERPMock erp = new ERPMock(args[0]);
+		final ERPNuclos erp = new ERPNuclos(args[0]);
 		/*
 		 * erp Nachrichten: Bestellung
 		 * 
@@ -107,6 +114,7 @@ public class ERPMock {
 								s = s + buff;
 							}
 						}
+						System.out.println(s);
 						erp.send(s);
 						read.close();
 						serv.close();
