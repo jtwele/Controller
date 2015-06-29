@@ -75,6 +75,4 @@ public class ERPreceive2 extends Thread{
 		consumer = new QueueingConsumer(channel);
 		this.channel.basicConsume(this.queuename, true, consumer);
 	}
-
-
 }

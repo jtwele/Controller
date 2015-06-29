@@ -1,4 +1,4 @@
-package erpMock;
+﻿package erpMock;
 
 import java.io.IOException;
 
@@ -86,7 +86,7 @@ public class ERPNuclos {
 	}
 	
 	public static void main(String[] args) throws IOException{
-		//final ERPNuclos erp = new ERPNuclos(args[0]);
+		final ERPNuclos erp = new ERPNuclos(args[0]);
 		/*
 		 * erp Nachrichten: Bestellung
 		 * 
@@ -112,7 +112,7 @@ public class ERPNuclos {
 						//	buff = read.readLine();
 							if (buff != null && !buff.equals("null")) {
 								s = s + buff;
-								System.out.println(s);
+								break;
 							}
 						}
 						System.out.println(s);
