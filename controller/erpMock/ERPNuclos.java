@@ -1,4 +1,4 @@
-﻿package erpMock;
+package erpMock;
 
 import java.io.IOException;
 
