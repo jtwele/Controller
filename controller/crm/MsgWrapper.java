@@ -12,7 +12,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 
 /**
- * Message-Wrapper für das SuiteCRM System (s.h. http://141.22.29.95/doc.html)
+ * Message-Wrapper für das SuiteCRM System
  *
  * @author le
  */
@@ -76,9 +76,9 @@ public class MsgWrapper {
     public static String[] createInvoiceMsg(String msg) {
         //TODO: Filter the the parameters for the invoiceMsg() function.
 
-    	System.out.println("createInvoice(): empfangen: "+msg );
+        System.out.println("createInvoice(): empfangen: " + msg);
         if ("error".equalsIgnoreCase(msg)) {
-            throw new IllegalArgumentException("WTF");
+            throw new IllegalArgumentException("Falsche Nachrichtenformat");
         }
 
         try (JsonReader jsonReader = Json.createReader(new StringReader(msg))) {
@@ -93,7 +93,7 @@ public class MsgWrapper {
             String itemNr = order.getString("productId");
             String product = jsonObject.getJsonObject("inhalt").getString("produkt");
             String price = order.getString("preis");
-            String quantity = order.getInt("menge") + "";
+            String quantity = order.getString("menge");
             System.out.println("Vom sugar uebergebene Menge: " + quantity);
 
             return invoiceMsg(companyName, itemNr, product, price, quantity);
